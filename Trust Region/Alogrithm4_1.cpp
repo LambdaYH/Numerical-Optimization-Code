@@ -81,3 +81,4 @@ double gettk(const VectorXd &g_fk,const MatrixXf &Bk, const double &delta_k){
 double min(const VectorXd& g_fk, const MatrixXf& Bk, const double &delta_k) {
     //
 }
+//
