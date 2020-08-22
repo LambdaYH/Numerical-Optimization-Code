@@ -63,22 +63,3 @@ int main() {
     //start ciculation
     
 }
-
-//The cauchy point
-VectorXd getPk(){
-    
-}
-
-double gettk(const VectorXd &g_fk,const MatrixXf &Bk, const double &delta_k){
-    if ((g_fk.transpose() * Bk * g_fk)(0,0) <= 0) {
-        return 1;
-    }
-    else {
-        return min(g_fk, Bk, std::forward<double>(delta_k));
-    }
-
-}
-double min(const VectorXd& g_fk, const MatrixXf& Bk, const double &delta_k) {
-    //
-}
-//
