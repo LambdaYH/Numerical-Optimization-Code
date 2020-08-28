@@ -4,9 +4,7 @@
 class theCauchyPoint {
 public:
 	theCauchyPoint(const Eigen::VectorXd& g_fk, const Eigen::MatrixXf& Bk, const double& delta_k): g_fk(g_fk),Bk(Bk),delta_k(delta_k) {}
-	Eigen::VectorXd getPk() {
-
-	}
+	Eigen::VectorXd getPk();
 private:
 	Eigen::VectorXd g_fk;
 	Eigen::MatrixXf Bk;

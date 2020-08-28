@@ -10,7 +10,7 @@ VectorXd theCauchyPoint::getPk() {
 }
 
 double theCauchyPoint::gettk() {
-    if ((g_fk.transpose() * Bk * g_fk)(0, 0) <= 0) {
+    if ((g_fk.transpose() * Bk * g_fk).norm() <= 0) {
         return 1;
     }
     else {
@@ -19,7 +19,7 @@ double theCauchyPoint::gettk() {
 
 }
 double theCauchyPoint::min() {
-    auto cal_temp = pow(g_fk.norm(), 3) / (delta_k * (g_fk.transpose() * Bk * g_fk)(0, 0));
+    auto cal_temp = pow(g_fk.norm(), 3) / (delta_k * (g_fk.transpose() * Bk * g_fk).norm());
     if (cal_temp > 1)
         return 1;
     else
