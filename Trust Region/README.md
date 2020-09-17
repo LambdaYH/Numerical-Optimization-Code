@@ -9,3 +9,6 @@ argmin /*expression*/ : the value of varibles which can let the value of express
 3. Steihug
 
 ### The cauchy point
+
+
+- the return type of martrix.norm() is double
