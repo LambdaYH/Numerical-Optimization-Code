@@ -6,3 +6,15 @@
 4. open install.vcxproj & build solutions
 5. set the directory of eigen in CMakeLists.txt
 6. cmake .
+
+- procedure3_1
+  > - [x] complied successfully
+  > - [ ] tested   
+
+- Line_Search_Algorithm
+  > - [x] complied successfully
+  > - [ ] tested
+
+- Trust Region
+  > - [x] complied successfully
+  > - [ ] tested
