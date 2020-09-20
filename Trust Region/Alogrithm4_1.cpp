@@ -11,18 +11,11 @@
 #include<utility>
 #include<vector>
 #include"the_cauchy_point.h"
+#include"someFuntions.h"
 
 using std::cout;
 using std::cin;
 using std::endl;
-
-using Eigen::VectorXd;
-using Eigen::MatrixXf;
-
-extern double mk(const VectorXd& pk, const VectorXd& xk, const MatrixXf& Bk);
-extern double function(const VectorXd& xk);
-extern VectorXd cal_gradient(const VectorXd& xk);
-extern double getrhok(const VectorXd& xk, const VectorXd& pk, const MatrixXf& Bk);
 
 //given delta delta0 and eta
 int main() {
@@ -69,17 +62,24 @@ int main() {
         }
     }
     //start ciculation
-    VectorXd g_fk;
-    VectorXd xk0;
-    std::vector < Eigen::VectorXd, Eigen::aligned_allocator<Eigen::VectorXd>> xk_s;
-    MatrixXf Bk;
+    Eigen::Matrix<double, 3, 1> g_fk;
+    Eigen::Matrix<double, 3, 1> xk0;
+    std::vector < Eigen::Matrix<double, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1>>> xk_s;
+    Eigen::Matrix<double, 3, 3> Bk;
+
+    g_fk << 1, 2, 3;
+    xk0 << 1, 2, 3;
+    Bk << 1, 2, 3, 
+        4, 5, 6,
+        7, 8, 9;
     double deltak = args[1];
     double deltakp = deltak;
-    int limit;
-    for (int k = 0;k < limit ; ++k) {
-        theCauchyPoint TCP{g_fk, Bk, deltak};
+    int limit = 5;
+    for (int k = 0;k <= limit ; ++k) {
+        theCauchyPoint<3> TCP{g_fk, Bk, deltak};
         auto pk = TCP.getPk();
-        auto rhopk = getrhok(xk_s[k], pk, Bk);
+        someFunctions<3> sf{ pk,xk_s[k],Bk };
+        auto rhopk = sf.get_rhok();
         if (rhopk < 1 / 4)
             deltakp = 1 / 4 * pk.norm();
         else {
@@ -97,19 +97,4 @@ int main() {
             double random_number = []{ return 2.0; }();
         */
     }
-}
-//mk(p) = fk + (gradient_fk)^T*P + 1/2 * P^T*BK*P
-double mk(const VectorXd &pk,const VectorXd& xk,const MatrixXf& Bk) {
-    return function(xk) + (cal_gradient(xk).transpose() * pk).norm() + ((1 / 2) * pk.transpose() * Bk * pk)(0, 0);
-}
-//object function's gradient of the point in which x = xk
-VectorXd cal_gradient(const VectorXd& xk) {
-    
-}
-double function(const VectorXd& xk) {
-    return 0;
-}
-
-double getrhok(const VectorXd& xk, const VectorXd& pk, const MatrixXf& Bk) {
-    return (function(xk) - function(xk + pk)) / (function(xk) - mk(pk, xk, Bk));
 }
