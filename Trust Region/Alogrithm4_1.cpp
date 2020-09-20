@@ -12,6 +12,7 @@
 #include<vector>
 #include"the_cauchy_point.h"
 #include"someFuntions.h"
+#include"the_dogleg_method.h"
 
 using std::cout;
 using std::cin;
